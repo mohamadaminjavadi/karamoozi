@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/{path?}', function () {
-    return view('welcome')->with(["globalData"=>collect([
-        'user'=> Auth::user()
-    ])]);
+    return view('welcome');
 })->where('path','.*');
 
 Route::post('/login', [AuthController::class, 'logIn']);

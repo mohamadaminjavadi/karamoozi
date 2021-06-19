@@ -18,8 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
+        'student_id',
         'password',
     ];
 
@@ -44,18 +43,13 @@ class User extends Authenticatable
 
 
     public static function fillUser($request, $user){
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->student_id = $request->student_id;
+        $user->student_number = $request->student_number;
         $user->password = Hash::make($request->password);
-        $user->save();
-        return $user->id;
-    }
-    public static function editUser($request, $user){
         $user->name = $request->name;
-        $user->email = $request->email;
-        $user->student_id = $request->student_id;
+        $user->last_name = $request->last_name;
+        $user->address = $request->address;
         $user->save();
         return $user->id;
     }
+    
 }

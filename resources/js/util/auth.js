@@ -1,8 +1,4 @@
 import Cookies from 'js-cookie'
-import React from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom'
-import Login from '../components/Login'
-import Dashboard from '../components/Dashboard'
 import cookie from 'cookie'
 
 
@@ -18,7 +14,6 @@ export const isLoggedIn = (reqCookies=null) => {
 export const logIn = () => {
     Cookies.set('ticket_management_is_user_logged_in', true, {expires: 86400, sameSite: 'lax'})
     return true;
-    
 }
 
 export const logOut = () => {

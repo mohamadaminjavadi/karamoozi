@@ -18,11 +18,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/showprofile',[App\Http\Controllers\api\userController::class,'show'])->middleware('auth:');
+// test , this route addes user to users table whitch we will get from golestan later
+// the function must change after connecting to golestan
 Route::post('/register',[App\Http\Controllers\api\userController::class,'create']);
-Route::post('/profilesubmit',[App\Http\Controllers\api\userController::class,'edit']);
-Route::post('/deleteaccount',[App\Http\Controllers\api\userController::class,'destroy']);
 
-// Route::post('/passwordreset',somewhere,'passwordrest'])->name('password.reset');
-// you should still define a route named password.reset that is responsible for displaying your application's "reset password" view. This is necessary because Laravel's Illuminate\Auth\Notifications\ResetPassword notification will generate the password reset URL via the password.reset named route.
+// from golestan, just an api
+Route::get('/userdata',[App\Http\Controllers\api\userController::class,'userData']); //with user id
 
+// in my app
+// نمیشه از ای پی آی برای یارو توی فرانت تعیین تکلیف کنی فقط میشه بگی اینجوری شد بعد اگه اینجوری بود، تو همون فرانت ریدایرکتش کنی
+Route::post('/profilesubmit',[App\Http\Controllers\submitted_users_Controller::class,'create'])->middleware('checksubmituser');
+Route::post('/signupcheck',[App\Http\Controllers\submitted_users_Controller::class,'signupcheck']);
+Route::post('/newgrade',[App\Http\Controllers\lessonsController::class,'newgrade']);

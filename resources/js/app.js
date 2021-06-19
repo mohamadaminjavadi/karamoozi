@@ -13,10 +13,22 @@ require('./bootstrap');
  */
 
 require('./components/Index');
-import Header from './components/Header';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Login from './components/Login'
+import Profile from './components/Profile'
+import SuccessMsg from './components/SuccessMsg'
+import Index from './components/Index'
+import React from 'react'
 
 if (document.getElementById('app')) {
-    ReactDOM.render(<Router><Header /></Router>, document.getElementById('app'));
+    ReactDOM.render(<Router><Index /></Router>, document.getElementById('app'));
 }
+<Router>
+    <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/successmsg" component={SuccessMsg} />
+    </Switch>
+</Router>
+
+

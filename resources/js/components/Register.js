@@ -1,26 +1,17 @@
 // import axios from 'axios'
 import React from 'react'
 import {useState} from 'react'
-import {Link,Switch, Route} from 'react-router-dom'
-import Login from './Login'
 
 export default function Register() {
-    const [email, setemail] = useState('')
     const [password, setpassword] = useState('')
     const [password2, setpassword2] = useState('')
-    const [student_id, setstudent_id] = useState('')
+    const [student_number, setstudent_number] = useState('')
     const [name, setname] = useState('')
+    const [last_name, setlast_name] = useState('')
+    const [address, setaddress] = useState('')
 
     const onsubmit= (e) =>{
         e.preventDefault();
-        if(!name){
-            alert('Please enter your name')
-            return
-        }
-        if(!email){
-            alert('Please enter email')
-            return
-        }
         if(!password){
             alert('Please enter password')
             return
@@ -33,11 +24,11 @@ export default function Register() {
             alert('check password and enter again')
             return
         }
-        if(!student_id){
+        if(!student_number){
             alert('Please enter student id')
             return
         }
-        var object = {name,email, password, student_id}
+        var object = {student_number,password,name,last_name,address}
         axios.post('http://localhost:8000/api/register', object).then(response => {
             console.log(response.data);
         });
@@ -49,35 +40,23 @@ export default function Register() {
         <div className="col-md-8 container">
             <div className="card">
                 <h5 className="card-header">
-                    Register
+                    ثبت نام
                 </h5>
                 <form className="card-body" onSubmit={onsubmit}>
-                <div className="card-text">
-                        name
+                    <div className="card-text">
+                        شماره دانشجویی
                     </div>
-                    <input
+                    <input 
                     type="text" 
-                    name="name" 
-                    placeholder="name" 
+                    name="student_number" 
+                    placeholder="enter your student id" 
                     className="form-control"
-                    value={name}
-                    onChange={(e) =>setname(e.target.value)}
+                    value={student_number}  
+                    onChange={(e) =>setstudent_number(e.target.value)}
                     />
                     <br />
                     <div className="card-text">
-                        email
-                    </div>
-                    <input
-                    type="email" 
-                    name="email" 
-                    placeholder="example@example.com" 
-                    className="form-control"
-                    value={email}
-                    onChange={(e) =>setemail(e.target.value)}
-                    />
-                    <br />
-                    <div className="card-text">
-                        password
+                        رمز عبور
                     </div>
                     <input 
                     type="password" 
@@ -89,7 +68,7 @@ export default function Register() {
                     />
                     <br />
                     <div className="card-text">
-                        confirm password
+                        تایید رمز عبور
                     </div>
                     <input 
                     type="password" 
@@ -101,27 +80,46 @@ export default function Register() {
                     />
                     <br />
                     <div className="card-text">
-                        student id
+                        نام
                     </div>
                     <input 
                     type="text" 
-                    name="student_id" 
-                    placeholder="enter your student id" 
+                    name="name" 
+                    placeholder="enter your name" 
                     className="form-control"
-                    value={student_id}  
-                    onChange={(e) =>setstudent_id(e.target.value)}
+                    value={name}
+                    onChange={(e) =>setname(e.target.value)}
                     />
                     <br />
-                    <button type="submit" className="btn btn-success submit">Register</button>
-                    <div className="card-footer">
-                        already have an account? <Link to="/login">login</Link>
-                        {/* link to login */}
+                    <div className="card-text">
+                        نام خانوادگی
                     </div>
+                    <input 
+                    type="text" 
+                    name="last_name" 
+                    placeholder="enter your last name" 
+                    className="form-control"
+                    value={last_name}
+                    onChange={(e) =>setlast_name(e.target.value)}
+                    />
+                    <br />
+                    <div className="card-text">
+                        آدرس
+                    </div>
+                    <input 
+                    type="text" 
+                    name="address" 
+                    placeholder="enter your address" 
+                    className="form-control"
+                    value={address}
+                    onChange={(e) =>setaddress(e.target.value)}
+                    />
+                    <br />
+
+                    
+                    <button type="submit" className="btn btn-success submit">Register</button>
                 </form>
             </div>
-            <Switch>
-                <Route exact path="/login"  component={Login}/>
-            </Switch>
         </div> 
     )
 }

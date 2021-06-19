@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
+use App\Models\submitted_users;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\createUser;
@@ -24,12 +25,18 @@ class userController extends Controller
         return $data;
     }
 
+    public function userData(){
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id,['name','last_name','address','student_number']);
+        return $user;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(createUser $request)
+    public function create(Request $request)
     {
         $user = new User;
         $user_id = User::fillUser($request, $user);
@@ -45,30 +52,13 @@ class userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
-    {
-        $id = Auth::user()->id;
-        $user = User::find($id);
-        return $user;
-    }
+    // public function show(Request $request)
+    // {
+    //     $id = Auth::user()->id;
+    //     $user = User::find($id);
+    //     return $user;
+    // } به یک کنترلر دیگر برای یک مدل دیگر که اطلاعات ثبت شده توسط کاربر را دارد اضافه شود
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        $user=User::find(Auth::user()->id);
-        $user_id=User::editUser($request,$user);
-        return response()->json([
-            'success'=>true,
-            'user_id'=>$user_id
-        ]);
-
-        
-    }
 
 
     /**

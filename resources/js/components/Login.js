@@ -1,88 +1,89 @@
-import React from 'react'
-import {useState} from 'react'
-import {Link,Switch, Route} from 'react-router-dom'
-import Register from './Register'
+import {useState} from 'react'  
 import api from '../util/api'
 import {logIn} from '../util/auth'
-import {useHistory} from 'react-router-dom'
+import SucessMsg from './SuccessMsg'
+import Profile from './Profile'
+
 
 export default function Login() {
-    const [formInput, setFormInput] = useState({email:'',password:''})
-    
+    const [formInput, setFormInput] = useState({student_number:'',password:''})
+    const [submitStatus, setsubmitStatus] = useState(false)
+    const [loginStatus, setloginStatus] = useState(false)
     const updateFormInput = (e) => {
         e.persist()
         setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
     }
 
-    let History = useHistory();
     const onsubmit=(e)=>{
         e.preventDefault();
-        
-        
+        if(!formInput.student_number){
+            alert('لطفا شماره دانشجویی خود را وارد کنید')
+            return
+        }
+        if(!formInput.password){
+            alert('لطفا رمز سیستم گلستان خود را وارد کنید')
+            return
+        }
         api().get('/sanctum/csrf-cookie').then(() => {
             api().post('http://localhost:8000/login', formInput).then(response=>{
+                // اینجا باید به ای پی آیی پست کنیم که دیتارو میگیره و بهمون پروفایل بر میگردونه
                 if(response.data.error){
-                    console.log(response.data.error)   
+                    alert('شماره دانشجویی و رمز عبور خود را مجددا بررسی نمایید')
+                    return
                 }else{
                     if(logIn()){
-                        History.push('/dashboard');
+                        setloginStatus(true);
+                        axios.post('http://localhost:8000/api/signupcheck',formInput).then(response=>{
+                            setsubmitStatus(response.data.submitted)
+                        })
                     }
                 }
             });
         });
     }
 
-
-
+    if(!loginStatus){
     return (
         <div className="col-md-8 container">
-            <div className="card">
+            <div className="card" dir="rtl">
                 <h5 className="card-header">
-                    Login
+                    ورود به سیستم
                 </h5>
                 <form className="card-body" onSubmit={onsubmit}>
                     <div className="card-text">
-                        email
+                        شماره دانشجویی
                     </div>
                     <input
-                    type="email" 
-                    name="email" 
-                    placeholder="example@example.com" 
+                    type="text" 
+                    name="student_number"
+                    placeholder="9913123456" 
                     className="form-control"
                     onChange={updateFormInput}
                     />
                     <br />
                     <div className="card-text">
-                        password
+                        رمز عبور
                     </div>
                     <input 
                     type="password" 
                     name="password" 
-                    placeholder="enter your password" 
+                    placeholder="رمز عبور" 
                     className="form-control"
                     onChange={updateFormInput}
                     />
                     <br />
-                     <div className="card-text">
-                        Remember me
-                    </div>
-                    <input 
-                    type="checkbox"
-                    name="remember"
-                    onChange={updateFormInput}
-                    />
-                    
                     <br /> 
-                    <button type="submit" className="btn btn-success submit">Login</button>
-                    <div className="card-footer">
-                        don't have an account? <Link to="/register">register</Link>
-                        {/* link to register */}
-                    </div>
+                    <button type="submit" className="btn btn-success submit">ورود</button>
                 </form>
             </div>
-            <Switch>
-                <Route exact path="/register" component={Register} />
-            </Switch>
+            
         </div>
     )
+    }
+    if(submitStatus){
+        return <SucessMsg />
+    }
+    else{
+        return <Profile />
+    }
 }

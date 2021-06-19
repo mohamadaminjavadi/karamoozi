@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\AuthCheck;
+
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -12,13 +13,14 @@ class AuthController extends Controller
     {
         $request->validate(
             [
-                'email'    => 'required|string',
+                'student_number'    => 'required|string',
                 'password' => 'required|string',
             ]
         );
-        if (Auth::guard()->attempt($request->only('email', 'password'))) {
+        // روند آوث کردن اینه که چیزی که کاربر وارد کرده رو بفرسته به ای پی آی و اون چک کنه ببینه درسته یا نه
+        if (Auth::guard()->attempt($request->only('student_number', 'password'))) {
             $request->session()->regenerate();
-            return response()->json([], 204);
+            return true;
         }
 
         
