@@ -20,7 +20,6 @@ class submitted_users extends Model
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
-        $user->address = $request->address;
         $user->phone = $request->phone;
         $user->telegram = $request->telegram;
         $user->save();

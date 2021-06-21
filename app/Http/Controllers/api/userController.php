@@ -25,11 +25,6 @@ class userController extends Controller
         return $data;
     }
 
-    public function userData(){
-        $user_id = Auth::user()->id;
-        $user = User::find($user_id,['name','last_name','address','student_number']);
-        return $user;
-    }
 
     /**
      * Show the form for creating a new resource.

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\submitted_users;
+use App\Models\tempProfile;
 use App\Http\Requests\CSU;
 class submitted_users_Controller extends Controller
 {
@@ -19,7 +20,6 @@ class submitted_users_Controller extends Controller
             'user_id'=>$user_id
         ]);
     }
-
     public function edit(CSU $request){
         $user = submitted_users::where('student_number',$request->student_number);
         $user_id = submitted_users::fillUser($request,$user);

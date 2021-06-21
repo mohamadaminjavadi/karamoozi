@@ -20,7 +20,9 @@ class AuthController extends Controller
         // روند آوث کردن اینه که چیزی که کاربر وارد کرده رو بفرسته به ای پی آی و اون چک کنه ببینه درسته یا نه
         if (Auth::guard()->attempt($request->only('student_number', 'password'))) {
             $request->session()->regenerate();
-            return true;
+            $user_id = Auth::user()->id;
+            $user = User::find($user_id,['name','last_name','student_number']);
+            return $user;
         }
 
         

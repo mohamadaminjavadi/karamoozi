@@ -42,7 +42,7 @@ return [
                 // this should change to real host
                 // 'port' =>6001,
                 // 'scheme' =>'http',
-                // 'encrypted'=>true,
+                'encrypted'=>true,
                 'curl_options' => [
                     CURLOPT_SSL_VERIFYHOST => 0,
                     CURLOPT_SSL_VERIFYPEER => 0,

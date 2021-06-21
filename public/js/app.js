@@ -5204,12 +5204,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.js");
-/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
-/* harmony import */ var _SuccessMsg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SuccessMsg */ "./resources/js/components/SuccessMsg.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var _SuccessMsg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SuccessMsg */ "./resources/js/components/SuccessMsg.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -5218,14 +5216,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Index() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_1__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.BrowserRouter, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Header__WEBPACK_IMPORTED_MODULE_1__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Switch, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
           exact: true,
           path: "/successmsg",
-          component: _SuccessMsg__WEBPACK_IMPORTED_MODULE_3__.default
+          component: _SuccessMsg__WEBPACK_IMPORTED_MODULE_2__.default
         })
       })
     })]
@@ -5297,6 +5295,11 @@ function Login() {
       loginStatus = _useState6[0],
       setloginStatus = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState8 = _slicedToArray(_useState7, 2),
+      data = _useState8[0],
+      setdata = _useState8[1];
+
   var updateFormInput = function updateFormInput(e) {
     e.persist();
     setFormInput(function (prevState) {
@@ -5320,6 +5323,8 @@ function Login() {
     (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().get('/sanctum/csrf-cookie').then(function () {
       (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://localhost:8000/login', formInput).then(function (response) {
         // اینجا باید به ای پی آیی پست کنیم که دیتارو میگیره و بهمون پروفایل بر میگردونه
+        setdata(response.data);
+
         if (response.data.error) {
           alert('شماره دانشجویی و رمز عبور خود را مجددا بررسی نمایید');
           return;
@@ -5378,7 +5383,9 @@ function Login() {
   if (submitStatus) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_SuccessMsg__WEBPACK_IMPORTED_MODULE_3__.default, {});
   } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Profile__WEBPACK_IMPORTED_MODULE_4__.default, {});
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Profile__WEBPACK_IMPORTED_MODULE_4__.default, {
+      data: data
+    });
   }
 }
 
@@ -5421,9 +5428,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var Profile = function Profile(_ref) {
-  var history = _ref.history;
-
+var Profile = function Profile(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       email = _useState2[0],
@@ -5446,42 +5451,45 @@ var Profile = function Profile(_ref) {
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      address = _useState10[0],
-      setaddress = _useState10[1];
+      phone = _useState10[0],
+      setphone = _useState10[1];
 
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      phone = _useState12[0],
-      setphone = _useState12[1];
+      telegram = _useState12[0],
+      settelegram = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      telegram = _useState14[0],
-      settelegram = _useState14[1];
+      submitStatus = _useState14[0],
+      setsubmitStatus = _useState14[1];
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      submitStatus = _useState16[0],
-      setsubmitStatus = _useState16[1];
+      data = _useState16[0],
+      setData = _useState16[1]; // console.log(props.data);
+  //         setname(response.data.name)
+  //         setstudent_number(response.data.student_number)
+  //         setlast_name(response.data.last_name)
+  //         let student_number = response.data.student_number
+  //         let object = {student_number}
+  //         axios.post('http://localhost:8000/api/signupcheck',object)
+  //         .then(response=>{
+  //             setsubmitStatus(response.data.submitted)
+  //         })
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
-      _useState18 = _slicedToArray(_useState17, 2),
-      data = _useState18[0],
-      setData = _useState18[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get('http://localhost:8000/api/userdata').then(function (response) {
-      setData(response.data);
-      setname(response.data.name);
-      setstudent_number(response.data.student_number);
-      setlast_name(response.data.last_name);
-      var student_number = response.data.student_number;
-      var object = {
-        student_number: student_number
-      };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/api/signupcheck', object).then(function (response) {
-        setsubmitStatus(response.data.submitted);
-      });
+    setData(props.data);
+    setname(props.data.name);
+    setstudent_number(props.data.student_number);
+    setlast_name(props.data.last_name);
+    var student_number = props.data.student_number;
+    var object = {
+      student_number: student_number
+    };
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/api/signupcheck', object).then(function (response) {
+      setsubmitStatus(response.data.submitted);
     });
   }, []);
 
@@ -5495,11 +5503,6 @@ var Profile = function Profile(_ref) {
 
     if (!email) {
       alert('لطفا ایمیل خود را وارد کنید');
-      return;
-    }
-
-    if (!address) {
-      alert('لطفا آدرس خود را وارد کنید');
       return;
     }
 
@@ -5518,16 +5521,13 @@ var Profile = function Profile(_ref) {
       last_name: last_name,
       email: email,
       student_number: student_number,
-      address: address,
       phone: phone,
       telegram: telegram
     };
     axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/api/profilesubmit', object).then(function (response) {
       if (response.data.success) {
-        alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد'); // <Redirect to='/successmsg'/> MUST redirect to successmsg cmpnnt
-
-        history.push('/successmsg');
-        location.assign('/successmsg'); // return <SuccessMsg />
+        alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد');
+        location.assign('/successmsg');
       }
     });
   };
@@ -5566,18 +5566,6 @@ var Profile = function Profile(_ref) {
             value: email,
             onChange: function onChange(e) {
               return setemail(e.target.value);
-            }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "card-text",
-            children: "\u0622\u062F\u0631\u0633 \u0645\u0646\u0632\u0644"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-            type: "text",
-            name: "address",
-            placeholder: data.address,
-            className: "form-control",
-            value: address,
-            onChange: function onChange(e) {
-              return setaddress(e.target.value);
             }
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "card-text",
@@ -5682,11 +5670,6 @@ function Register() {
       last_name = _useState10[0],
       setlast_name = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState12 = _slicedToArray(_useState11, 2),
-      address = _useState12[0],
-      setaddress = _useState12[1];
-
   var onsubmit = function onsubmit(e) {
     e.preventDefault();
 
@@ -5714,8 +5697,7 @@ function Register() {
       student_number: student_number,
       password: password,
       name: name,
-      last_name: last_name,
-      address: address
+      last_name: last_name
     };
     axios.post('http://localhost:8000/api/register', object).then(function (response) {
       console.log(response.data);
@@ -5791,18 +5773,6 @@ function Register() {
           value: last_name,
           onChange: function onChange(e) {
             return setlast_name(e.target.value);
-          }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "card-text",
-          children: "\u0622\u062F\u0631\u0633"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-          type: "text",
-          name: "address",
-          placeholder: "enter your address",
-          className: "form-control",
-          value: address,
-          onChange: function onChange(e) {
-            return setaddress(e.target.value);
           }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
           type: "submit",

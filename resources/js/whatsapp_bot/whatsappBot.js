@@ -24,7 +24,8 @@ function start(client) {
             let message = {"phone":data.phone,"grade":data.grade,"lesson":data.lesson}
         
         client
-        .sendText(message["phone"]+'@c.us', 'نمره شما ثبت شد.\n نام درس:'+message["lesson"]+'\nنمره:'+message["grade"]+'\nخدانگهدار')
+        // .sendText(message["phone"]+'@c.us', 'نمره شما ثبت شد.\n نام درس:'+message["lesson"]+'\nنمره:'+message["grade"]+'\nخدانگهدار')
+        .sendText(message["phone"]+'@c.us','با سلام\nدانشجوی گرامی،\n نمره درس '+message["lesson"]+' شما ثبت شد \n'+'نمره:'+message["grade"]+'\nدانشگاه قم')
         .then((result) => {
             console.log('Result: ', result); //return object success
         })

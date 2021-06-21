@@ -9,6 +9,8 @@ export default function Login() {
     const [formInput, setFormInput] = useState({student_number:'',password:''})
     const [submitStatus, setsubmitStatus] = useState(false)
     const [loginStatus, setloginStatus] = useState(false)
+    const [data, setdata] = useState({})
+
     const updateFormInput = (e) => {
         e.persist()
         setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
@@ -27,6 +29,7 @@ export default function Login() {
         api().get('/sanctum/csrf-cookie').then(() => {
             api().post('http://localhost:8000/login', formInput).then(response=>{
                 // اینجا باید به ای پی آیی پست کنیم که دیتارو میگیره و بهمون پروفایل بر میگردونه
+                setdata(response.data);
                 if(response.data.error){
                     alert('شماره دانشجویی و رمز عبور خود را مجددا بررسی نمایید')
                     return
@@ -41,7 +44,6 @@ export default function Login() {
             });
         });
     }
-
     if(!loginStatus){
     return (
         <div className="col-md-8 container">
@@ -84,6 +86,6 @@ export default function Login() {
         return <SucessMsg />
     }
     else{
-        return <Profile />
+        return <Profile data={data} />
     }
 }

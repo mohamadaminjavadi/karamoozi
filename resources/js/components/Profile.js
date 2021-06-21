@@ -3,33 +3,43 @@ import {useState, useEffect, React} from 'react'
 import {BrowserRouter as Router, Switch, Route, Redirect, withRouter} from 'react-router-dom'
 import SuccessMsg from './SuccessMsg'
 
-const Profile = ({history}) => {
+
+const Profile = (props) => {
     const [email, setemail] = useState('')
     const [student_number, setstudent_number] = useState('')
     const [name, setname] = useState('')
     const [last_name, setlast_name] = useState('')
-    const [address, setaddress] = useState('')
     const [phone, setphone] = useState('')
     const [telegram, settelegram] = useState('')
     const [submitStatus, setsubmitStatus] = useState(false)
-
     const [data, setData] = useState([])
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/userdata')
-        .then(response=>{
-            setData(response.data)
-            setname(response.data.name)
-            setstudent_number(response.data.student_number)
-            setlast_name(response.data.last_name)
+    // console.log(props.data);
 
-            let student_number = response.data.student_number
-            let object = {student_number}
-            axios.post('http://localhost:8000/api/signupcheck',object)
-            .then(response=>{
-                setsubmitStatus(response.data.submitted)
-            })
+    //         setname(response.data.name)
+    //         setstudent_number(response.data.student_number)
+    //         setlast_name(response.data.last_name)
+
+    //         let student_number = response.data.student_number
+    //         let object = {student_number}
+    //         axios.post('http://localhost:8000/api/signupcheck',object)
+    //         .then(response=>{
+    //             setsubmitStatus(response.data.submitted)
+    //         })
+    useEffect(() => {
+        setData(props.data)
+        setname(props.data.name)
+        setstudent_number(props.data.student_number)
+        setlast_name(props.data.last_name)
+
+        let student_number = props.data.student_number
+        let object = {student_number}
+        axios.post('http://localhost:8000/api/signupcheck',object)
+        .then(response=>{
+            setsubmitStatus(response.data.submitted)
         })
     }, [])
+    
+    
 
     const SubmitFormOne= (e) =>{
         e.preventDefault();
@@ -41,10 +51,6 @@ const Profile = ({history}) => {
             alert('لطفا ایمیل خود را وارد کنید')
             return
         }
-        if(!address){
-            alert('لطفا آدرس خود را وارد کنید')
-            return
-        }
         if(!phone){
             alert('لطفا شماره تلفن واتساپ خود را وارد کنید')
             return
@@ -53,14 +59,11 @@ const Profile = ({history}) => {
             alert('لطفا آیدی تلگرام خود را وارد کنید')
             return
         }
-        var object = {name,last_name,email, student_number,address,phone,telegram}
+        var object = {name,last_name,email, student_number,phone,telegram}
         axios.post('http://localhost:8000/api/profilesubmit', object).then(response =>{
             if(response.data.success){
                 alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد')
-                // <Redirect to='/successmsg'/> MUST redirect to successmsg cmpnnt
-                history.push('/successmsg');
                 location.assign('/successmsg');
-                // return <SuccessMsg />
             }
         })
     }
@@ -101,18 +104,6 @@ const Profile = ({history}) => {
                     className="form-control"
                     value={email}
                     onChange={(e) =>setemail(e.target.value)}
-                    />
-                    <br />
-                    <div className="card-text">
-                        آدرس منزل
-                    </div>
-                    <input
-                    type="text" 
-                    name="address" 
-                    placeholder={data.address}
-                    className="form-control"
-                    value={address}
-                    onChange={(e) =>setaddress(e.target.value)}
                     />
                     <br />
                     <div className="card-text">

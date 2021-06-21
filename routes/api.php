@@ -22,9 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // the function must change after connecting to golestan
 Route::post('/register',[App\Http\Controllers\api\userController::class,'create']);
 
-// from golestan, just an api
-Route::get('/userdata',[App\Http\Controllers\api\userController::class,'userData']); //with user id
-
 // in my app
 // نمیشه از ای پی آی برای یارو توی فرانت تعیین تکلیف کنی فقط میشه بگی اینجوری شد بعد اگه اینجوری بود، تو همون فرانت ریدایرکتش کنی
 Route::post('/profilesubmit',[App\Http\Controllers\submitted_users_Controller::class,'create'])->middleware('checksubmituser');

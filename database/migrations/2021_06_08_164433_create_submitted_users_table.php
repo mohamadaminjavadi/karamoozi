@@ -17,7 +17,6 @@ class CreateSubmittedUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_name');
-            $table->string('address');
             $table->string('phone')->unique();
             $table->string('student_number')->unique();
             $table->string('telegram')->unique();

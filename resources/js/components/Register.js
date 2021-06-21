@@ -8,7 +8,6 @@ export default function Register() {
     const [student_number, setstudent_number] = useState('')
     const [name, setname] = useState('')
     const [last_name, setlast_name] = useState('')
-    const [address, setaddress] = useState('')
 
     const onsubmit= (e) =>{
         e.preventDefault();
@@ -28,7 +27,7 @@ export default function Register() {
             alert('Please enter student id')
             return
         }
-        var object = {student_number,password,name,last_name,address}
+        var object = {student_number,password,name,last_name}
         axios.post('http://localhost:8000/api/register', object).then(response => {
             console.log(response.data);
         });
@@ -103,19 +102,6 @@ export default function Register() {
                     onChange={(e) =>setlast_name(e.target.value)}
                     />
                     <br />
-                    <div className="card-text">
-                        آدرس
-                    </div>
-                    <input 
-                    type="text" 
-                    name="address" 
-                    placeholder="enter your address" 
-                    className="form-control"
-                    value={address}
-                    onChange={(e) =>setaddress(e.target.value)}
-                    />
-                    <br />
-
                     
                     <button type="submit" className="btn btn-success submit">Register</button>
                 </form>
