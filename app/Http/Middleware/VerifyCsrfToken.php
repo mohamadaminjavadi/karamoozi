@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'http://ssl.qom.ac.ir/grade_announcer/karamoozi/public/*'
     ];
 }
