@@ -3,6 +3,7 @@ import api from '../util/api'
 import {logIn} from '../util/auth'
 import SucessMsg from './SuccessMsg'
 import Profile from './Profile'
+import Cookies from 'js-cookie';
 
 
 export default function Login() {
