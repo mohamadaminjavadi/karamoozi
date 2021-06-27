@@ -27,13 +27,12 @@ export default function Login() {
             alert('لطفا رمز سیستم گلستان خود را وارد کنید')
             return
         }
-        const token = document.querySelector('meta[name="csrf-token"]');
-        api().get('/sanctum/csrf-cookie').then(() => {
-            api().post('http://localhost:8000/login', formInput,{
+        let token = document.head.querySelector('meta[name="csrf-token"]');
+            api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/login', formInput,{
                 expires: 86400, sameSite: 'lax',
                 headers:{
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': token.content
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': token.content,
                 }
             }).then(response=>{
                 // اینجا باید به ای پی آیی پست کنیم که دیتارو میگیره و بهمون پروفایل بر میگردونه
@@ -44,13 +43,12 @@ export default function Login() {
                 }else{
                     if(logIn()){
                         setloginStatus(true);
-                        axios.post('http://localhost:8000/api/signupcheck',formInput).then(response=>{
+                        axios.post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck',formInput).then(response=>{
                             setsubmitStatus(response.data.submitted)
                         })
                     }
                 }
             });
-        });
     }
     if(!loginStatus){
     return (

@@ -25,5 +25,5 @@ Route::post('/register',[App\Http\Controllers\api\userController::class,'create'
 // in my app
 // نمیشه از ای پی آی برای یارو توی فرانت تعیین تکلیف کنی فقط میشه بگی اینجوری شد بعد اگه اینجوری بود، تو همون فرانت ریدایرکتش کنی
 Route::post('/profilesubmit',[App\Http\Controllers\submitted_users_Controller::class,'create'])->middleware('checksubmituser');
-Route::post('/signupcheck',[App\Http\Controllers\submitted_users_Controller::class,'signupcheck']);
+Route::post('/signupcheck',[App\Http\Controllers\submitted_users_Controller::class,'signupcheck'])->name('signupcheck');
 Route::post('/newgrade',[App\Http\Controllers\lessonsController::class,'newgrade']);
