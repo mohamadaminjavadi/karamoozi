@@ -1,4 +1,5 @@
 import axios from 'axios'
+import api from '../util/api'
 import {useState, useEffect, React} from 'react'
 import {BrowserRouter as Router, Switch, Route, Redirect, withRouter} from 'react-router-dom'
 import SuccessMsg from './SuccessMsg'
@@ -33,7 +34,7 @@ const Profile = (props) => {
 
         let student_number = props.data.student_number
         let object = {student_number}
-        axios.post('http://localhost:8000/api/signupcheck',object)
+        axios.post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck',object)
         .then(response=>{
             setsubmitStatus(response.data.submitted)
         })
@@ -60,7 +61,12 @@ const Profile = (props) => {
             return
         }
         var object = {name,last_name,email, student_number,phone,telegram}
-        axios.post('http://localhost:8000/api/profilesubmit', object).then(response =>{
+        api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/profilesubmit', object,{
+            expires: 86400, sameSite: 'lax',
+            headers:{
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': token.content,
+            }}).then(response =>{
             if(response.data.success){
                 alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد')
                 location.assign('/successmsg');

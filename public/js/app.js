@@ -5341,7 +5341,7 @@ function Login() {
       } else {
         if ((0,_util_auth__WEBPACK_IMPORTED_MODULE_2__.logIn)()) {
           setloginStatus(true);
-          axios.post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', formInput, {
+          (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', formInput, {
             expires: 86400,
             sameSite: 'lax',
             headers: {
@@ -5420,11 +5420,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _SuccessMsg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SuccessMsg */ "./resources/js/components/SuccessMsg.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _util_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/api */ "./resources/js/util/api.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _SuccessMsg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SuccessMsg */ "./resources/js/components/SuccessMsg.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5444,43 +5445,44 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var Profile = function Profile(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       email = _useState2[0],
       setemail = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
       student_number = _useState4[0],
       setstudent_number = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
       name = _useState6[0],
       setname = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       last_name = _useState8[0],
       setlast_name = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
       phone = _useState10[0],
       setphone = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState12 = _slicedToArray(_useState11, 2),
       telegram = _useState12[0],
       settelegram = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
       submitStatus = _useState14[0],
       setsubmitStatus = _useState14[1];
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState16 = _slicedToArray(_useState15, 2),
       data = _useState16[0],
       setData = _useState16[1]; // console.log(props.data);
@@ -5495,7 +5497,7 @@ var Profile = function Profile(props) {
   //         })
 
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     setData(props.data);
     setname(props.data.name);
     setstudent_number(props.data.student_number);
@@ -5504,7 +5506,7 @@ var Profile = function Profile(props) {
     var object = {
       student_number: student_number
     };
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/api/signupcheck', object).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', object).then(function (response) {
       setsubmitStatus(response.data.submitted);
     });
   }, []);
@@ -5540,7 +5542,14 @@ var Profile = function Profile(props) {
       phone: phone,
       telegram: telegram
     };
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://localhost:8000/api/profilesubmit', object).then(function (response) {
+    (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/profilesubmit', object, {
+      expires: 86400,
+      sameSite: 'lax',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN': token.content
+      }
+    }).then(function (response) {
       if (response.data.success) {
         alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد');
         location.assign('/successmsg');
@@ -5549,32 +5558,32 @@ var Profile = function Profile(props) {
   };
 
   if (submitStatus) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_SuccessMsg__WEBPACK_IMPORTED_MODULE_2__.default, {});
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_SuccessMsg__WEBPACK_IMPORTED_MODULE_3__.default, {});
   } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "col-md-8 container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "card",
         dir: "rtl",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
           className: "card-header",
           children: "\u0627\u0637\u0644\u0627\u0639\u0627\u062A \u062F\u0627\u0646\u0634\u062C\u0648"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
           className: "card-body",
           onSubmit: SubmitFormOne,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "card-text",
             children: ["\u0646\u0627\u0645: ", data.name]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "card-text",
             children: ["\u0646\u0627\u0645 \u062E\u0627\u0646\u0648\u0627\u062F\u06AF\u06CC: ", data.last_name]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "card-text",
             children: ["\u0634\u0645\u0627\u0631\u0647 \u062F\u0627\u0646\u0634\u062C\u0648\u06CC\u06CC: ", data.student_number]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "\u0644\u0637\u0641\u0627 \u0641\u0631\u0645 \u0632\u06CC\u0631 \u0631\u0627 \u0628\u0627 \u062F\u0642\u062A \u06A9\u0627\u0645\u0644 \u06A9\u0646\u06CC\u062F ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), "\u0644\u0637\u0641\u0627 \u0641\u0631\u0645 \u0632\u06CC\u0631 \u0631\u0627 \u0628\u0627 \u062F\u0642\u062A \u06A9\u0627\u0645\u0644 \u06A9\u0646\u06CC\u062F ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "card-text",
             children: "\u0627\u06CC\u0645\u06CC\u0644"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "email",
             name: "email",
             placeholder: "mail@gmail.com",
@@ -5583,10 +5592,10 @@ var Profile = function Profile(props) {
             onChange: function onChange(e) {
               return setemail(e.target.value);
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "card-text",
             children: "\u0634\u0645\u0627\u0631\u0647 \u0648\u0627\u062A\u0633\u0627\u067E"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "text",
             name: "phone",
             placeholder: "whatsapp phone number",
@@ -5595,10 +5604,10 @@ var Profile = function Profile(props) {
             onChange: function onChange(e) {
               return setphone(e.target.value);
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "card-text",
             children: "\u0622\u06CC\u062F\u06CC \u062A\u0644\u06AF\u0631\u0627\u0645"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "text",
             name: "telegram",
             placeholder: "telegramid@",
@@ -5607,18 +5616,18 @@ var Profile = function Profile(props) {
             onChange: function onChange(e) {
               return settelegram(e.target.value);
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             type: "submit",
             className: "btn btn-success submit",
             children: "\u0630\u062E\u06CC\u0631\u0647"
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Switch, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.BrowserRouter, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
             exact: true,
             path: "/successmsg",
-            component: _SuccessMsg__WEBPACK_IMPORTED_MODULE_2__.default
+            component: _SuccessMsg__WEBPACK_IMPORTED_MODULE_3__.default
           })
         })
       })]
@@ -5626,7 +5635,7 @@ var Profile = function Profile(props) {
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.withRouter)(Profile));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)(Profile));
 
 /***/ }),
 
