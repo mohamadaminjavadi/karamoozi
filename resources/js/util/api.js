@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export default function api() {
     const api = axios.create({
-        baseURL: 'http://localhost:8000',
+        baseURL: 'http://ssl.qom.ac.ir/grade_announcer/Kevin/public',
         withCredentials: true
     })
 
