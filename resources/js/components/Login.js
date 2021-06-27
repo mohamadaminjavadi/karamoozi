@@ -48,6 +48,7 @@ export default function Login() {
                             headers:{
                                 'X-Requested-With': 'XMLHttpRequest',
                                 'X-CSRF-TOKEN': token.content,
+                            }
                             }).then(response=>{
                             setsubmitStatus(response.data.submitted)
                         })
