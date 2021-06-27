@@ -77,7 +77,7 @@ const Profile = (props) => {
             }}).then(response =>{
             if(response.data.success){
                 alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد')
-                location.assign('/successmsg');
+                location.assign('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/successmsg');
             }
         })
     }
@@ -149,7 +149,7 @@ const Profile = (props) => {
             </div>
             <Router>
                 <Switch>
-                    <Route exact path="/successmsg" component={SuccessMsg} />
+                    <Route exact path="http://ssl.qom.ac.ir/grade_announcer/Kevin/public/successmsg" component={SuccessMsg} />
                 </Switch>
             </Router>
             </div>

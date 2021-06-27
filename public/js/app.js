@@ -5561,7 +5561,7 @@ var Profile = function Profile(props) {
     }).then(function (response) {
       if (response.data.success) {
         alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد');
-        location.assign('/successmsg');
+        location.assign('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/successmsg');
       }
     });
   };
@@ -5635,7 +5635,7 @@ var Profile = function Profile(props) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
             exact: true,
-            path: "/successmsg",
+            path: "http://ssl.qom.ac.ir/grade_announcer/Kevin/public/successmsg",
             component: _SuccessMsg__WEBPACK_IMPORTED_MODULE_3__.default
           })
         })
