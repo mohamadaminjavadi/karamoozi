@@ -5506,7 +5506,15 @@ var Profile = function Profile(props) {
     var object = {
       student_number: student_number
     };
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', object).then(function (response) {
+    var token = document.head.querySelector('meta[name="csrf-token"]');
+    (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', object, {
+      expires: 86400,
+      sameSite: 'lax',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN': token.content
+      }
+    }).then(function (response) {
       setsubmitStatus(response.data.submitted);
     });
   }, []);
@@ -5542,6 +5550,7 @@ var Profile = function Profile(props) {
       phone: phone,
       telegram: telegram
     };
+    var token = document.head.querySelector('meta[name="csrf-token"]');
     (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/profilesubmit', object, {
       expires: 86400,
       sameSite: 'lax',
