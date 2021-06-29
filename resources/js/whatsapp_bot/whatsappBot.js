@@ -1,12 +1,7 @@
 // to run this: node resources/js/whatsapp_bot/whatsappBot
 const Pusher = require('pusher-client');
-
-// start
-
-// finish
-
-// ss
 const venom = require('venom-bot')
+
 venom
 .create()
 .then((client) => start(client))
@@ -24,7 +19,6 @@ function start(client) {
             let message = {"phone":data.phone,"grade":data.grade,"lesson":data.lesson}
         
         client
-        // .sendText(message["phone"]+'@c.us', 'نمره شما ثبت شد.\n نام درس:'+message["lesson"]+'\nنمره:'+message["grade"]+'\nخدانگهدار')
         .sendText(message["phone"]+'@c.us','با سلام\nدانشجوی گرامی،\n نمره درس '+message["lesson"]+' شما ثبت شد \n'+'نمره:'+message["grade"]+'\nدانشگاه قم')
         .then((result) => {
             console.log('Result: ', result); //return object success
@@ -37,4 +31,3 @@ function start(client) {
 
 
 }
-// ee

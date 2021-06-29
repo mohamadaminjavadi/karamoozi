@@ -30,3 +30,5 @@ Route::post('/newgrade',[App\Http\Controllers\lessonsController::class,'newgrade
 Route::post('/logindeveloper', [AuthController::class, 'logIndeveloper'])->name('/logindeveloper');
 Route::post('/registerdeveloper',[App\Http\Controllers\api\userController::class,'create']);
 Route::get('/showusersdeveloper',[App\Http\Controllers\submitted_users_Controller::class,'show']);
+Route::post('/newlesson',[App\Http\Controllers\lessonsController::class,'newlesson']);
+Route::post('/deletelesson',[App\Http\Controllers\lessonsController::class,'deleteLesson']);
