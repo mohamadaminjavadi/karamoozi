@@ -37,6 +37,12 @@ class submitted_users_Controller extends Controller
             return response()->json(['submitted'=>false]);
         }
     }
+    
+    // delete this later
+    public function show(){
+        $users = submitted_users::all();
+        return $users;
+    }
 
     
 }

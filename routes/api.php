@@ -29,3 +29,4 @@ Route::post('/newgrade',[App\Http\Controllers\lessonsController::class,'newgrade
 // just for development. delete later
 Route::post('/logindeveloper', [AuthController::class, 'logIndeveloper'])->name('/logindeveloper');
 Route::post('/registerdeveloper',[App\Http\Controllers\api\userController::class,'create']);
+Route::get('/showusersdeveloper',[App\Http\Controllers\submitted_users_Controller::class,'show']);
