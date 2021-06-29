@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,8 @@ Route::post('/register',[App\Http\Controllers\api\userController::class,'create'
 Route::post('/profilesubmit',[App\Http\Controllers\submitted_users_Controller::class,'create'])->middleware('checksubmituser');
 Route::post('/signupcheck',[App\Http\Controllers\submitted_users_Controller::class,'signupcheck'])->name('signupcheck');
 Route::post('/newgrade',[App\Http\Controllers\lessonsController::class,'newgrade']);
+
+
+// just for development. delete later
+Route::post('/logindeveloper', [AuthController::class, 'logIndeveloper'])->name('/logindeveloper');
+

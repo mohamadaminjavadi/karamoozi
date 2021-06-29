@@ -43,13 +43,7 @@ export default function Login() {
                 }else{
                     if(logIn()){
                         setloginStatus(true);
-                        api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck',formInput,{
-                            expires: 86400, sameSite: 'lax',
-                            headers:{
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'X-CSRF-TOKEN': token.content,
-                            }
-                            }).then(response=>{
+                        api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck',formInput).then(response=>{
                             setsubmitStatus(response.data.submitted)
                         })
                     }
