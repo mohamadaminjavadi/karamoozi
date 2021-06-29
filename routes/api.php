@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // test , this route addes user to users table whitch we will get from golestan later
 // the function must change after connecting to golestan
-Route::post('/register',[App\Http\Controllers\api\userController::class,'create']);
+Route::post('/registerdeveloper',[App\Http\Controllers\api\userController::class,'create']);
 
 // in my app
 // نمیشه از ای پی آی برای یارو توی فرانت تعیین تکلیف کنی فقط میشه بگی اینجوری شد بعد اگه اینجوری بود، تو همون فرانت ریدایرکتش کنی
