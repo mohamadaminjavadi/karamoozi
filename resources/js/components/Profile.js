@@ -35,13 +35,7 @@ const Profile = (props) => {
         let student_number = props.data.student_number
         let object = {student_number}
         let token = document.head.querySelector('meta[name="csrf-token"]');
-        api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck',object,{
-            expires: 86400, sameSite: 'lax',
-            headers:{
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': token.content,
-            }
-            })
+        api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck',object)
         .then(response=>{
             setsubmitStatus(response.data.submitted)
         })
@@ -69,12 +63,7 @@ const Profile = (props) => {
         }
         var object = {name,last_name,email, student_number,phone,telegram}
         let token = document.head.querySelector('meta[name="csrf-token"]');
-        api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/profilesubmit', object,{
-            expires: 86400, sameSite: 'lax',
-            headers:{
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': token.content,
-            }}).then(response =>{
+        api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/profilesubmit', object).then(response =>{
             if(response.data.success){
                 alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد')
                 location.assign('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/successmsg');
