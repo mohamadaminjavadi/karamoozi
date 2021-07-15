@@ -11,14 +11,33 @@ export default function Login() {
     const [submitStatus, setsubmitStatus] = useState(false)
     const [loginStatus, setloginStatus] = useState(false)
     const [data, setdata] = useState({})
-
-    const updateFormInput = (e) => {
+    const [username, setusername] = useState({})
+    const [password, setpassword] = useState({})
+    const [isValid, setisValid] = useState(false)
+    
+    const updateUsername=(e)=>{
         e.persist()
+        
+        const regEx =/^[0-9]\d{9}$/;
+        if(e.target.value.match(regEx)){
+            (e) =>setusername({[student_number]: e.target.value})
+            setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
+            setisValid(true);
+        }
+        else{
+            setisValid(false);
+        }
+    }
+    const updatePassword=(e)=>{
+        e.persist();
+        (e) =>setusername(e.target.value)
         setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
     }
-
     const onsubmit=(e)=>{
         e.preventDefault();
+        if(!isValid){
+            alert('شماره دانشجویی وارد شده اشتباه است')
+        }
         if(!formInput.student_number){
             alert('لطفا شماره دانشجویی خود را وارد کنید')
             return
@@ -66,7 +85,7 @@ export default function Login() {
                     name="student_number"
                     placeholder="9913123456" 
                     className="form-control"
-                    onChange={updateFormInput}
+                    onChange={updateUsername}
                     />
                     <br />
                     <div className="card-text">
@@ -77,7 +96,7 @@ export default function Login() {
                     name="password" 
                     placeholder="رمز عبور" 
                     className="form-control"
-                    onChange={updateFormInput}
+                    onChange={updatePassword}
                     />
                     <br />
                     <br /> 

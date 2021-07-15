@@ -5303,8 +5303,46 @@ function Login() {
       data = _useState8[0],
       setdata = _useState8[1];
 
-  var updateFormInput = function updateFormInput(e) {
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState10 = _slicedToArray(_useState9, 2),
+      username = _useState10[0],
+      setusername = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState12 = _slicedToArray(_useState11, 2),
+      password = _useState12[0],
+      setpassword = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isValid = _useState14[0],
+      setisValid = _useState14[1];
+
+  var updateUsername = function updateUsername(e) {
     e.persist();
+    var regEx = /^[0-9]\d{9}$/;
+
+    if (e.target.value.match(regEx)) {
+      (function (e) {
+        return setusername(_defineProperty({}, student_number, e.target.value));
+      });
+
+      setFormInput(function (prevState) {
+        return _objectSpread(_objectSpread({}, prevState), {}, _defineProperty({}, e.target.name, e.target.value));
+      });
+      setisValid(true);
+    } else {
+      setisValid(false);
+    }
+  };
+
+  var updatePassword = function updatePassword(e) {
+    e.persist();
+
+    (function (e) {
+      return setusername(e.target.value);
+    });
+
     setFormInput(function (prevState) {
       return _objectSpread(_objectSpread({}, prevState), {}, _defineProperty({}, e.target.name, e.target.value));
     });
@@ -5312,6 +5350,10 @@ function Login() {
 
   var onsubmit = function onsubmit(e) {
     e.preventDefault();
+
+    if (!isValid) {
+      alert('شماره دانشجویی وارد شده اشتباه است');
+    }
 
     if (!formInput.student_number) {
       alert('لطفا شماره دانشجویی خود را وارد کنید');
@@ -5341,14 +5383,7 @@ function Login() {
       } else {
         if ((0,_util_auth__WEBPACK_IMPORTED_MODULE_2__.logIn)()) {
           setloginStatus(true);
-          (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', formInput, {
-            expires: 86400,
-            sameSite: 'lax',
-            headers: {
-              'X-Requested-With': 'XMLHttpRequest',
-              'X-CSRF-TOKEN': token.content
-            }
-          }).then(function (response) {
+          (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', formInput).then(function (response) {
             setsubmitStatus(response.data.submitted);
           });
         }
@@ -5376,7 +5411,7 @@ function Login() {
             name: "student_number",
             placeholder: "9913123456",
             className: "form-control",
-            onChange: updateFormInput
+            onChange: updateUsername
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "card-text",
             children: "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631"
@@ -5385,7 +5420,7 @@ function Login() {
             name: "password",
             placeholder: "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631",
             className: "form-control",
-            onChange: updateFormInput
+            onChange: updatePassword
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
             type: "submit",
             className: "btn btn-success submit",
@@ -5507,14 +5542,7 @@ var Profile = function Profile(props) {
       student_number: student_number
     };
     var token = document.head.querySelector('meta[name="csrf-token"]');
-    (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', object, {
-      expires: 86400,
-      sameSite: 'lax',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': token.content
-      }
-    }).then(function (response) {
+    (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck', object).then(function (response) {
       setsubmitStatus(response.data.submitted);
     });
   }, []);
@@ -5551,14 +5579,7 @@ var Profile = function Profile(props) {
       telegram: telegram
     };
     var token = document.head.querySelector('meta[name="csrf-token"]');
-    (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/profilesubmit', object, {
-      expires: 86400,
-      sameSite: 'lax',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': token.content
-      }
-    }).then(function (response) {
+    (0,_util_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/profilesubmit', object).then(function (response) {
       if (response.data.success) {
         alert('ثبت نام در سیستم با موفقیت انجام شد. در صورت ثبت نمره اطلاع رسانی خواهد شد');
         location.assign('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/successmsg');
