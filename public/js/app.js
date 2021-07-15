@@ -5353,6 +5353,7 @@ function Login() {
 
     if (!isValid) {
       alert('شماره دانشجویی وارد شده اشتباه است');
+      return;
     }
 
     if (!formInput.student_number) {

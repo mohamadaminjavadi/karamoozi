@@ -37,6 +37,7 @@ export default function Login() {
         e.preventDefault();
         if(!isValid){
             alert('شماره دانشجویی وارد شده اشتباه است')
+            return
         }
         if(!formInput.student_number){
             alert('لطفا شماره دانشجویی خود را وارد کنید')
