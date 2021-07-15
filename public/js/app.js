@@ -5521,17 +5521,17 @@ var Profile = function Profile(props) {
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
       _useState16 = _slicedToArray(_useState15, 2),
       data = _useState16[0],
-      setData = _useState16[1]; // console.log(props.data);
-  //         setname(response.data.name)
-  //         setstudent_number(response.data.student_number)
-  //         setlast_name(response.data.last_name)
-  //         let student_number = response.data.student_number
-  //         let object = {student_number}
-  //         axios.post('http://localhost:8000/api/signupcheck',object)
-  //         .then(response=>{
-  //             setsubmitStatus(response.data.submitted)
-  //         })
+      setData = _useState16[1];
 
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      PhoneisValid = _useState18[0],
+      setPhoneisValid = _useState18[1];
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      TelisValid = _useState20[0],
+      setTelisValid = _useState20[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     setData(props.data);
@@ -5548,8 +5548,47 @@ var Profile = function Profile(props) {
     });
   }, []);
 
+  var updatePhone = function updatePhone(e) {
+    e.persist();
+    var regEx = /^[9][8][9]\d{9}$/;
+
+    if (e.target.value.match(regEx)) {
+      (function (e) {
+        return setphone(e.target.value);
+      });
+
+      setPhoneisValid(true);
+    } else {
+      setPhoneisValid(false);
+    }
+  };
+
+  var updateTelegram = function updateTelegram(e) {
+    e.persist();
+    var regEx2 = /^@\w*$/;
+
+    if (e.target.value.match(regEx2)) {
+      (function (e) {
+        return settelegram(e.target.value);
+      });
+
+      setTelisValid(true);
+    } else {
+      setTelisValid(false);
+    }
+  };
+
   var SubmitFormOne = function SubmitFormOne(e) {
     e.preventDefault();
+
+    if (!TelisValid) {
+      alert('لطفا آیدی تلگرام را به درستی وارد کنید\nمثال:@example');
+      return;
+    }
+
+    if (!PhoneisValid) {
+      alert('لطفا شماره تلفن را به درستی وارد کنید\nمثال:989191234567');
+    }
 
     if (!student_number || !last_name || !name) {
       alert('لطفا وارد سیستم شوید');
@@ -5620,24 +5659,20 @@ var Profile = function Profile(props) {
             placeholder: "mail@gmail.com",
             className: "form-control",
             value: email,
-            onChange: function onChange(e) {
-              return setemail(e.target.value);
-            }
+            onChange: updateTelegram
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "card-text",
-            children: "\u0634\u0645\u0627\u0631\u0647 \u0648\u0627\u062A\u0633\u0627\u067E"
+            children: "\u0634\u0645\u0627\u0631\u0647 \u0648\u0627\u062A\u0633\u0627\u067E (\u0628\u0647 \u0627\u06CC\u0646 \u0635\u0648\u0631\u062A: 989191234567)"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "text",
             name: "phone",
             placeholder: "whatsapp phone number",
             className: "form-control",
             value: phone,
-            onChange: function onChange(e) {
-              return setphone(e.target.value);
-            }
+            onChange: updatePhone
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "card-text",
-            children: "\u0622\u06CC\u062F\u06CC \u062A\u0644\u06AF\u0631\u0627\u0645"
+            children: "\u0622\u06CC\u062F\u06CC \u062A\u0644\u06AF\u0631\u0627\u0645 (\u0628\u0647 \u0627\u06CC\u0646 \u0635\u0648\u0631\u062A: @example)"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "text",
             name: "telegram",
