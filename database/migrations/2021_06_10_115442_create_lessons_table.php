@@ -16,7 +16,7 @@ class CreateLessonsTable extends Migration
         if(!Schema::hasTable('grades')){
             Schema::create('lessons', function (Blueprint $table) {
                 $table->id();
-                $table->string('lesson_number');
+                $table->string('lesson_number')->unique();
                 $table->string('name');
             });
         }

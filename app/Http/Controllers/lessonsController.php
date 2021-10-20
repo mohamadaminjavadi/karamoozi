@@ -47,4 +47,17 @@ class lessonsController extends Controller
         }
         
     }
+
+    public function newlesson(Request $request){
+        $lesson = new lessonsModel;
+        $lesson_id = lessonsModel::filler($lesson,$request);
+        return response()->json([
+            'success'=>true,
+            'lesson_id'=>$lesson_id
+        ]);
+    }
+
+    public function deleteLesson(Request $request){
+        lessonsModel::where('lesson_number',$request->lesson_number)->delete();
+    }
 }

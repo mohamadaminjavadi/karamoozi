@@ -11,14 +11,34 @@ export default function Login() {
     const [submitStatus, setsubmitStatus] = useState(false)
     const [loginStatus, setloginStatus] = useState(false)
     const [data, setdata] = useState({})
-
-    const updateFormInput = (e) => {
+    const [username, setusername] = useState({})
+    const [password, setpassword] = useState({})
+    const [isValid, setisValid] = useState(false)
+    
+    const updateUsername=(e)=>{
         e.persist()
+        
+        const regEx =/^[0-9]\d{9}$/;
+        if(e.target.value.match(regEx)){
+            (e) =>setusername({[student_number]: e.target.value})
+            setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
+            setisValid(true);
+        }
+        else{
+            setisValid(false);
+        }
+    }
+    const updatePassword=(e)=>{
+        e.persist();
+        (e) =>setusername(e.target.value)
         setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
     }
-
     const onsubmit=(e)=>{
         e.preventDefault();
+        if(!isValid){
+            alert('شماره دانشجویی وارد شده اشتباه است')
+            return
+        }
         if(!formInput.student_number){
             alert('لطفا شماره دانشجویی خود را وارد کنید')
             return
@@ -27,8 +47,14 @@ export default function Login() {
             alert('لطفا رمز سیستم گلستان خود را وارد کنید')
             return
         }
-        api().get('/sanctum/csrf-cookie').then(() => {
-            api().post('http://localhost:8000/login', formInput).then(response=>{
+        let token = document.head.querySelector('meta[name="csrf-token"]');
+            api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/login', formInput,{
+                expires: 86400, sameSite: 'lax',
+                headers:{
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': token.content,
+                }
+            }).then(response=>{
                 // اینجا باید به ای پی آیی پست کنیم که دیتارو میگیره و بهمون پروفایل بر میگردونه
                 setdata(response.data);
                 if(response.data.error){
@@ -37,13 +63,12 @@ export default function Login() {
                 }else{
                     if(logIn()){
                         setloginStatus(true);
-                        axios.post('http://localhost:8000/api/signupcheck',formInput).then(response=>{
+                        api().post('http://ssl.qom.ac.ir/grade_announcer/Kevin/public/api/signupcheck',formInput).then(response=>{
                             setsubmitStatus(response.data.submitted)
                         })
                     }
                 }
             });
-        });
     }
     if(!loginStatus){
     return (
@@ -61,7 +86,7 @@ export default function Login() {
                     name="student_number"
                     placeholder="9913123456" 
                     className="form-control"
-                    onChange={updateFormInput}
+                    onChange={updateUsername}
                     />
                     <br />
                     <div className="card-text">
@@ -72,7 +97,7 @@ export default function Login() {
                     name="password" 
                     placeholder="رمز عبور" 
                     className="form-control"
-                    onChange={updateFormInput}
+                    onChange={updatePassword}
                     />
                     <br />
                     <br /> 

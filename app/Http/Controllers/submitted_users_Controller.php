@@ -30,13 +30,18 @@ class submitted_users_Controller extends Controller
     }
     public function signupcheck(Request $request){
         $user = submitted_users::where('student_number',$request->student_number)->get();
-
         if(count($user)>=1){
             return response()->json(['submitted'=>true]);
         }
         else{
             return response()->json(['submitted'=>false]);
         }
+    }
+    
+    // delete this later
+    public function show(){
+        $users = submitted_users::all();
+        return $users;
     }
 
     

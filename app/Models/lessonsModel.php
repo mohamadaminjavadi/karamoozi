@@ -10,7 +10,16 @@ class lessonsModel extends Model
 {
     use HasFactory;
     protected $table= 'lessons';
+    public $timestamps = false;
     public function users(){
         return $this->belongsToMany(submitted_users::class, 'grades', 'lesson_id', 'student_id');
+    }
+
+    public static function filler($lesson,$request){
+        
+        $lesson->lesson_number = $request->lesson_number;
+        $lesson->name = $request->name;
+        $lesson->save();
+        return $lesson->id;
     }
 }

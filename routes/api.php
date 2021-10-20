@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// test , this route addes user to users table whitch we will get from golestan later
-// the function must change after connecting to golestan
-Route::post('/register',[App\Http\Controllers\api\userController::class,'create']);
-
 // in my app
 // نمیشه از ای پی آی برای یارو توی فرانت تعیین تکلیف کنی فقط میشه بگی اینجوری شد بعد اگه اینجوری بود، تو همون فرانت ریدایرکتش کنی
 Route::post('/profilesubmit',[App\Http\Controllers\submitted_users_Controller::class,'create'])->middleware('checksubmituser');
-Route::post('/signupcheck',[App\Http\Controllers\submitted_users_Controller::class,'signupcheck']);
+Route::post('/signupcheck',[App\Http\Controllers\submitted_users_Controller::class,'signupcheck'])->name('signupcheck');
 Route::post('/newgrade',[App\Http\Controllers\lessonsController::class,'newgrade']);
+
+
+// just for development. delete later
+Route::post('/logindeveloper', [AuthController::class, 'logIndeveloper'])->name('/logindeveloper');
+Route::post('/registerdeveloper',[App\Http\Controllers\api\userController::class,'create']);
+Route::get('/showusersdeveloper',[App\Http\Controllers\submitted_users_Controller::class,'show']);
+Route::post('/newlesson',[App\Http\Controllers\lessonsController::class,'newlesson']);
+Route::post('/deletelesson',[App\Http\Controllers\lessonsController::class,'deleteLesson']);

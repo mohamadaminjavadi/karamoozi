@@ -17,6 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/{path?}', function () {
     return view('welcome');
 })->where('path','.*');
-
-Route::post('/login', [AuthController::class, 'logIn']);
-Route::post('/logout', [AuthController::class, 'logOut']);
+Route::post('/login', [AuthController::class, 'logIn'])->name('/login');
+Route::post('/logout', [AuthController::class, 'logOut'])->name('/logout');
