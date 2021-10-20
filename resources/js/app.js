@@ -20,7 +20,6 @@ import Profile from './components/Profile'
 import SuccessMsg from './components/SuccessMsg'
 import Index from './components/Index'
 import React from 'react'
-
 if (document.getElementById('app')) {
     ReactDOM.render(<Router><Index /></Router>, document.getElementById('app'));
 }
